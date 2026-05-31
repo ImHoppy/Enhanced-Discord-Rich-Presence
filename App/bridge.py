@@ -323,8 +323,8 @@ class MultiServiceBridge:
             
             activity["type"] = int(settings.get("type", 0))
             activity["details"] = self._interpolate_placeholders(settings.get("details"), payload)
-            state_text = self._interpolate_placeholders(settings.get("state"), payload)
-            activity["state"] = state_text
+            state_text = self._interpolate_placeholders(settings.get("state"), payload).strip()
+            if state_text: activity["state"] = state_text
             
             if special_cfg.get("details_url", {}).get("enabled"):
                 details_url = self._interpolate_placeholders(special_cfg["details_url"].get("url"), payload)
